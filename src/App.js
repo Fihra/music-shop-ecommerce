@@ -8,20 +8,22 @@ import Cart from './components/Cart';
 
 const App = () => {
   return (
+    <Router>
     <div className="App">
       <Navbar/>
       <h1>Music Shop</h1>
       <main>
-      <Router>
+      
         <Switch>
-          <Route path="/about" render={(renderProps) => <About/>}/>
-          <Route path="/vsts" render={(renderProps) => <VSTs/>}/>
-          <Route path="/contact" render={(renderProps) => <Contact/>}/>
-          <Route path="/cart" render={(renderProps) => <Cart/>}/>
+          <Route path="/about" render={(props) => <About {...props}/>}/>
+          <Route path="/vsts" render={(props) => <VSTs {...props}/>}/>
+          <Route path="/contact" render={(props) => <Contact {...props}/>}/>
+          <Route path="/cart" render={(props) => <Cart {...props}/>}/>
         </Switch>
-      </Router>
+      
       </main>
     </div>
+    </Router>
   );
 }
 
