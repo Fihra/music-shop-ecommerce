@@ -1,23 +1,26 @@
-import logo from './logo.svg';
 import './App.css';
+import Navbar from './components/Navbar';
+import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
+import About from './components/About';
+import VSTs from './components/VSTs';
+import Contact from './components/Contact';
+import Cart from './components/Cart';
 
-function App() {
+const App = () => {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Navbar/>
+      <h1>Music Shop</h1>
+      <main>
+      <Router>
+        <Switch>
+          <Route path="/about" render={(renderProps) => <About/>}/>
+          <Route path="/vsts" render={(renderProps) => <VSTs/>}/>
+          <Route path="/contact" render={(renderProps) => <Contact/>}/>
+          <Route path="/cart" render={(renderProps) => <Cart/>}/>
+        </Switch>
+      </Router>
+      </main>
     </div>
   );
 }
