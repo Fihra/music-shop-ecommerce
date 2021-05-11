@@ -8,6 +8,7 @@ import Cart from './components/Cart';
 import { data } from './components/data';
 import React, { useEffect, useState, useReducer } from 'react';
 import { Actions } from './components/Actions';
+import { ProductContext } from './components/ProductContext';
 
 const initialState = {
   products: "",
@@ -34,22 +35,24 @@ const App = () => {
   }, [])
   console.log(productsData);
   return (
-    <Router>
-    <div className="App">
-      <Navbar/>
-      <h1>Music Shop</h1>
-      <main>
-      
-        <Switch>
-          <Route path="/about" render={(props) => <About {...props}/>}/>
-          <Route path="/vsts" render={(props) => <VSTs {...props}/>}/>
-          <Route path="/contact" render={(props) => <Contact {...props}/>}/>
-          <Route path="/cart" render={(props) => <Cart {...props}/>}/>
-        </Switch>
-      
-      </main>
-    </div>
-    </Router>
+    <ProductContext.Provider value={{productsData: productsData, productDispatch: dispatch}}>
+      <Router>
+      <div className="App">
+        <Navbar/>
+        <h1>Music Shop</h1>
+        <main>
+        
+          <Switch>
+            <Route path="/about" render={(props) => <About {...props}/>}/>
+            <Route path="/vsts" render={(props) => <VSTs {...props} />}/>
+            <Route path="/contact" render={(props) => <Contact {...props}/>}/>
+            <Route path="/cart" render={(props) => <Cart {...props}/>}/>
+          </Switch>
+        
+        </main>
+      </div>
+      </Router>
+    </ProductContext.Provider>
   );
 }
 
