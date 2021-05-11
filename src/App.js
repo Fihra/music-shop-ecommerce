@@ -5,8 +5,34 @@ import About from './components/About';
 import VSTs from './components/VSTs';
 import Contact from './components/Contact';
 import Cart from './components/Cart';
+import { data } from './components/data';
+import React, { useEffect, useState, useReducer } from 'react';
+import { Actions } from './components/Actions';
+
+const initialState = {
+  products: "",
+}
+
+const reducer = (state = initialState, action) => {
+  switch(action.type){
+    case Actions.GET_PRODUCTS:
+      return {
+        ...state,
+        products: action.payload
+      }
+    default:
+      return state;
+  }
+}
 
 const App = () => {
+  const [productsData, dispatch] = useReducer(reducer, initialState);
+  console.log(data);
+
+  useEffect(() => {
+    dispatch({type: Actions.GET_PRODUCTS, payload: data})
+  }, [])
+  console.log(productsData);
   return (
     <Router>
     <div className="App">
