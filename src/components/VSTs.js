@@ -1,9 +1,27 @@
-import React from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import ProductCard from './ProductCard';
+import { ProductContext } from './ProductContext';
 
 const VSTs = () => {
+    const [products, setProducts] = useState(null);
+    const productContext = useContext(ProductContext);
+
+    useEffect(() => {
+        setProducts(productContext.productsData.products);
+    }, [productContext])
+
+    const showProducts = () => {
+        return products.map((product, i) => {
+            console.log(product);
+            return <li><ProductCard key={i} product={product}/></li>
+        })
+    }
     return (
         <div>
-           All VSTs 
+           <h2>All VSTs</h2>
+           <ul>
+            {products ? showProducts() : ""}
+            </ul>
         </div>
     )
 }
