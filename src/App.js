@@ -12,6 +12,7 @@ import { ProductContext } from './components/ProductContext';
 
 const initialState = {
   products: "",
+  myCart: []
 }
 
 const reducer = (state = initialState, action) => {
@@ -21,9 +22,22 @@ const reducer = (state = initialState, action) => {
         ...state,
         products: action.payload
       }
+    case Actions.ADD_TO_CART:
+      const newCart = AddingToCart(state.myCart, action.payload);
+      console.log(newCart);
+      return {
+        ...state,
+        myCart: newCart 
+      }
     default:
       return state;
   }
+}
+
+const AddingToCart = (currentCart, item) => {
+  let newCart = [currentCart];
+  newCart = [...newCart, item];
+  return newCart;
 }
 
 const App = () => {
