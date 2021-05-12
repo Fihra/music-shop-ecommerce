@@ -5,14 +5,21 @@ import { ProductContext } from './ProductContext';
 const ProductCard = (props) => {
     const [product, setProduct] = useState(props.product);
     const { productDispatch } = useContext(ProductContext);
+    const [inCart, setInCart] = useState(false);
 
     const showProduct = () => {
 
         const handleClick = (selectedProduct) => {
             console.log(selectedProduct);
-            productDispatch({type: Actions.ADD_TO_CART, payload: selectedProduct})
+            if(inCart === false){
+                setInCart(true);
+                productDispatch({type: Actions.ADD_TO_CART, payload: selectedProduct})
+            } else {
+                setInCart(false);
+                productDispatch({type: Actions.DELETE_FROM_CART, payload: selectedProduct.id})
+            }
         }
-
+        console.log(inCart)
         return(
             <div className="product-card">
                 <div style={{height: 100, width: 450, border: "1px solid black", margin: "auto", marginTop: 20}}>
@@ -21,7 +28,7 @@ const ProductCard = (props) => {
                 <h3>{product.name}</h3>
                 Price: <span>${product.price}</span>
                 <p>{product.description}</p>
-                <button onClick={() => handleClick(product)}>Add to Cart</button>
+                <button onClick={() => handleClick(product)}>{inCart ? "Remove from Cart" : "Add to Cart"}</button>
             </div>
         )
     }

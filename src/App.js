@@ -12,7 +12,7 @@ import { ProductContext } from './components/ProductContext';
 
 const initialState = {
   products: "",
-  myCart: []
+  myCart: ""
 }
 
 const reducer = (state = initialState, action) => {
@@ -29,15 +29,29 @@ const reducer = (state = initialState, action) => {
         ...state,
         myCart: newCart 
       }
+    case Actions.DELETE_FROM_CART:
+      const deleteCart = DeleteFromCart(state.myCart, action.payload);
+      console.log(deleteCart);
+      return{
+        ...state,
+        myCart: deleteCart
+      }
     default:
       return state;
   }
 }
 
 const AddingToCart = (currentCart, item) => {
-  let newCart = [currentCart];
+  let newCart = [...currentCart];
   newCart = [...newCart, item];
   return newCart;
+}
+
+const DeleteFromCart = (currentCart, itemID) => {
+  let newCart = [...currentCart];
+  newCart = newCart.filter((item) => item.id !== itemID);
+  return newCart;
+
 }
 
 const App = () => {
