@@ -36,3 +36,29 @@
     transform: rotate(360deg);
   }
 }
+
+.nav-bar {
+  display: flex;
+  list-style-type: none;
+}
+
+.nav-bar li{
+  margin: auto;
+  border: 1px solid black;
+}
+
+.nav-bar li:hover {
+  background-color: lightskyblue;
+}
+
+.products-list {
+  list-style-type: none;
+}
+
+.product-card {
+  margin: auto;
+  width: 500px;
+  height: 400px;
+  border: 1px solid black;
+
+}

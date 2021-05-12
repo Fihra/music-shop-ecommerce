@@ -13,13 +13,13 @@ const VSTs = () => {
     const showProducts = () => {
         return products.map((product, i) => {
             console.log(product);
-            return <li><ProductCard key={i} product={product}/></li>
+            return <li key={i}><ProductCard key={i} product={product}/></li>
         })
     }
     return (
         <div>
            <h2>All VSTs</h2>
-           <ul>
+           <ul className="products-list">
             {products ? showProducts() : ""}
             </ul>
         </div>
