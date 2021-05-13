@@ -6,7 +6,7 @@ import VSTs from './components/VSTs';
 import Contact from './components/Contact';
 import Cart from './components/Cart';
 import { data } from './components/data';
-import React, { useEffect, useState, useReducer } from 'react';
+import React, { useEffect, useReducer } from 'react';
 import { Actions } from './components/Actions';
 import { ProductContext } from './components/ProductContext';
 
@@ -47,6 +47,7 @@ const reducer = (state = initialState, action) => {
   }
 }
 
+//Add to Cart
 const AddingToCart = (currentCart, item) => {
   let newCart = [...currentCart];
   newCart = [...newCart, item];
@@ -54,14 +55,21 @@ const AddingToCart = (currentCart, item) => {
   return newCart;
 }
 
+//Delete from Cart
 const DeleteFromCart = (currentCart, itemID) => {
   let newCart = [...currentCart];
   newCart = newCart.filter((item) => item.id !== itemID);
-  localStorage.setItem('myCart', JSON.stringify(newCart));
-  return newCart;
+  if(newCart.length <= 0){
+    localStorage.clear();
+    return "";
+  } else {
+    localStorage.setItem('myCart', JSON.stringify(newCart));
+    return newCart;
+  }
 
 }
 
+//If Cart has items already
 const ExistingInCart = () => {
   let storageCart = localStorage.getItem("myCart");
   storageCart = JSON.parse(storageCart);
@@ -73,12 +81,12 @@ const App = () => {
 
   useEffect(() => {
     dispatch({type: Actions.GET_PRODUCTS, payload: data})
-    // console.log(localStorage.getItem("myCart"));
     if(localStorage.getItem("myCart") !== null){
       dispatch({type: Actions.EXISTING_CART})
     }
+    if(localStorage.getItem("myCart") === "[]") localStorage.clear();
   }, [])
-  console.log(productsData);
+
   return (
     <ProductContext.Provider value={{productsData: productsData, productDispatch: dispatch}}>
       <Router>

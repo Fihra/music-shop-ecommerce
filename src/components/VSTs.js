@@ -12,7 +12,7 @@ const VSTs = () => {
 
     const showProducts = () => {
         return products.map((product, i) => {
-            console.log(product);
+            // console.log(product);
             return <li key={i}><ProductCard key={i} product={product}/></li>
         })
     }

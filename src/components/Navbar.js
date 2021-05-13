@@ -5,7 +5,6 @@ import { ProductContext } from './ProductContext';
 
 const Navbar = () => {
     const { productsData } = useContext(ProductContext);
-    console.log(productsData.myCart);
 
     const showRedDot = () => {
         return(

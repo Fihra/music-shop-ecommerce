@@ -21,30 +21,17 @@ const ProductCard = (props) => {
         }
 
         const checkIfInCart = (selectedProduct) => {
-            // const myCart = productsData.myCart;
-            const myCart = localStorage.getItem("myCart");
-            console.log(myCart);
+            if(productsData.myCart === "") return false;
+
+            const myCart = productsData.myCart;
             if(myCart !== null){
-                const convertedCart = JSON.parse(myCart);
-                console.log(convertedCart);
-                let itemExistsInCart = convertedCart.find(product => product["ID"] === selectedProduct.ID);
-                // return itemExistsInCart;
-                console.log(itemExistsInCart);
+                let itemExistsInCart = myCart.some(product => product["id"] === selectedProduct["id"]);
+                return itemExistsInCart;
             } else {
                 return false;
             }
-            // const myCart = sessionStorage.getItem("myCart");
- 
-
-            // if(myCart !== ""){
-            //     let itemExistsInCart = myCart.some(product => product["ID"] === selectedProduct.ID);
-            //     return itemExistsInCart;
-            // }
-
-
         }
 
-        // console.log(inCart)
         return(
             <div className="product-card">
                 <div style={{height: 100, width: 450, border: "1px solid black", margin: "auto", marginTop: 20}}>

@@ -1,16 +1,28 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { ProductContext } from './ProductContext';
 
 const Cart = () => {
+    const productContext = useContext(ProductContext);
+    const myCart = productContext.productsData.myCart;
 
-    const session = localStorage.getItem("myCart");
+    const showItems = () => {
+        return (
+            <div>
+                <ul>
+                    {myCart.map((item, i) => {
+                        return <li key={i}>{item.name} ======= ${item.price}</li>
+                    })}
+                </ul>
+            </div>
+        )
+    }
 
-    console.log(typeof session.valueOf('myCart'));
 
     return (
         <div>
-            My Shopping Cart
+            <h2>My Shopping Cart</h2>
             <div>
-            {session && session.valueOf("myCart") !== "[]"  ? "Show cart": "Nothing in cart"}
+            {myCart === "" && myCart.length <= 0  ? "Nothing in Cart": showItems()}
             </div>
         </div>
     )
