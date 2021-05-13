@@ -36,6 +36,12 @@ const reducer = (state = initialState, action) => {
         ...state,
         myCart: deleteCart
       }
+    case Actions.EXISTING_CART:
+      const cartExists = ExistingInCart();
+      return {
+        ...state,
+        myCart: cartExists
+      }
     default:
       return state;
   }
@@ -56,12 +62,21 @@ const DeleteFromCart = (currentCart, itemID) => {
 
 }
 
+const ExistingInCart = () => {
+  let storageCart = localStorage.getItem("myCart");
+  storageCart = JSON.parse(storageCart);
+  return storageCart;
+}
+
 const App = () => {
   const [productsData, dispatch] = useReducer(reducer, initialState);
-  console.log(data);
 
   useEffect(() => {
     dispatch({type: Actions.GET_PRODUCTS, payload: data})
+    // console.log(localStorage.getItem("myCart"));
+    if(localStorage.getItem("myCart") !== null){
+      dispatch({type: Actions.EXISTING_CART})
+    }
   }, [])
   console.log(productsData);
   return (

@@ -27,8 +27,11 @@ const ProductCard = (props) => {
             if(myCart !== null){
                 const convertedCart = JSON.parse(myCart);
                 console.log(convertedCart);
+                let itemExistsInCart = convertedCart.find(product => product["ID"] === selectedProduct.ID);
+                // return itemExistsInCart;
+                console.log(itemExistsInCart);
             } else {
-                console.log("nothing");
+                return false;
             }
             // const myCart = sessionStorage.getItem("myCart");
  
