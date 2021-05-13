@@ -44,12 +44,14 @@ const reducer = (state = initialState, action) => {
 const AddingToCart = (currentCart, item) => {
   let newCart = [...currentCart];
   newCart = [...newCart, item];
+  localStorage.setItem('myCart', JSON.stringify(newCart));
   return newCart;
 }
 
 const DeleteFromCart = (currentCart, itemID) => {
   let newCart = [...currentCart];
   newCart = newCart.filter((item) => item.id !== itemID);
+  localStorage.setItem('myCart', JSON.stringify(newCart));
   return newCart;
 
 }
