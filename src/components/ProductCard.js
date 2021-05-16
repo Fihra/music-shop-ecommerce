@@ -7,7 +7,6 @@ const ProductCard = (props) => {
     const { productDispatch, productsData } = useContext(ProductContext);
 
     const showProduct = () => {
-
         const handleClick = (selectedProduct) => {
             if(checkIfInCart(selectedProduct) === false){
                 productDispatch({type: Actions.ADD_TO_CART, payload: selectedProduct})
