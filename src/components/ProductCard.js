@@ -28,7 +28,7 @@ const ProductCard = (props) => {
         return(
             <div className="product-card">
                 <div style={{height: 100, width: 450, border: "1px solid black", margin: "auto", marginTop: 20}}>
-                {product.logo}
+                <img style={{height: 100, width: 100}}src={product.logo} alt={product.description}/>
                 </div>
                 <h3>{product.name}</h3>
                 Price: <span>${product.price}</span>

@@ -2,7 +2,7 @@ import './App.css';
 import Navbar from './components/Navbar';
 import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
 import About from './components/About';
-import VSTs from './components/VSTs';
+import Products from './components/Products';
 import Contact from './components/Contact';
 import Cart from './components/Cart';
 import { data } from './components/data';
@@ -97,7 +97,7 @@ const App = () => {
         
           <Switch>
             <Route path="/about" render={(props) => <About {...props}/>}/>
-            <Route path="/vsts" render={(props) => <VSTs {...props} />}/>
+            <Route path="/products" render={(props) => <Products {...props} />}/>
             <Route path="/contact" render={(props) => <Contact {...props}/>}/>
             <Route path="/cart" render={(props) => <Cart {...props}/>}/>
           </Switch>

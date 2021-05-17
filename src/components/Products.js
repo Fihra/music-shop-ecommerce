@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import ProductCard from './ProductCard';
 import { ProductContext } from './ProductContext';
 
-const VSTs = () => {
+const Products = () => {
     const [products, setProducts] = useState(null);
     const productContext = useContext(ProductContext);
 
@@ -18,7 +18,7 @@ const VSTs = () => {
     }
     return (
         <div>
-           <h2>All VSTs</h2>
+           <h2>All Products</h2>
            <ul className="products-list">
             {products ? showProducts() : ""}
             </ul>
@@ -26,4 +26,4 @@ const VSTs = () => {
     )
 }
 
-export default VSTs;
+export default Products;
