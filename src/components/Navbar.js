@@ -18,6 +18,7 @@ const Navbar = () => {
 
     return(
         <Paper>
+            <h1>Music Shop</h1>
             <SiAudiomack/>
             {/* <ul className="nav-bar">
                 <li><Link to="/about">About</Link></li>

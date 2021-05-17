@@ -15,8 +15,7 @@ const Products = () => {
     const showProducts = () => {
         return products.map((product, i) => {
             // return <li key={i}><ProductCard key={i} product={product}/></li>
-            return <Grid item xs={3} key={i}><ProductCard key={i} product={product}/></Grid>
-            // console.log(product);    
+            return <Grid item xs={4} key={i}><ProductCard key={i} product={product}/></Grid> 
         })
     }
     
@@ -27,9 +26,8 @@ const Products = () => {
         //     {products ? showProducts() : ""}
         //     </ul>
         // </div>
-        <Grid container spacing={7}>
+        <Grid container spacing={7} style={{paddingTop: 50}}>
             {products ? showProducts() : ""}    
-
         </Grid>
     )
 }

@@ -24,14 +24,12 @@ const reducer = (state = initialState, action) => {
       }
     case Actions.ADD_TO_CART:
       const newCart = AddingToCart(state.myCart, action.payload);
-      // console.log(newCart);
       return {
         ...state,
         myCart: newCart 
       }
     case Actions.DELETE_FROM_CART:
       const deleteCart = DeleteFromCart(state.myCart, action.payload);
-      // console.log(deleteCart);
       return{
         ...state,
         myCart: deleteCart
@@ -92,9 +90,7 @@ const App = () => {
       <Router>
       <div className="App">
         <Navbar/>
-        <h1>Music Shop</h1>
         <main>
-        
           <Switch>
             <Route path="/about" render={(props) => <About {...props}/>}/>
             <Route path="/products" render={(props) => <Products {...props} />}/>

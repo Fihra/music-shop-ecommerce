@@ -40,6 +40,7 @@ const ProductCard = (props) => {
                 <CardHeader
                     title={product.name}
                     subheader={`$${product.price}`}
+                    subheaderTypographyProps={{color: "primary"}}
                 />
                 <CardMedia
                     style={{height: 100, width: 100, margin: 'auto'}}
