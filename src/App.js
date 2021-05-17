@@ -24,14 +24,14 @@ const reducer = (state = initialState, action) => {
       }
     case Actions.ADD_TO_CART:
       const newCart = AddingToCart(state.myCart, action.payload);
-      console.log(newCart);
+      // console.log(newCart);
       return {
         ...state,
         myCart: newCart 
       }
     case Actions.DELETE_FROM_CART:
       const deleteCart = DeleteFromCart(state.myCart, action.payload);
-      console.log(deleteCart);
+      // console.log(deleteCart);
       return{
         ...state,
         myCart: deleteCart

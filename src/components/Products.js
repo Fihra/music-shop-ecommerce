@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useContext } from 'react';
 import ProductCard from './ProductCard';
 import { ProductContext } from './ProductContext';
+import { makeStyles } from '@material-ui/core/styles';
+import { Grid  } from '@material-ui/core';
 
 const Products = () => {
     const [products, setProducts] = useState(null);
@@ -12,17 +14,23 @@ const Products = () => {
 
     const showProducts = () => {
         return products.map((product, i) => {
-            // console.log(product);
-            return <li key={i}><ProductCard key={i} product={product}/></li>
+            // return <li key={i}><ProductCard key={i} product={product}/></li>
+            return <Grid item xs={3} key={i}><ProductCard key={i} product={product}/></Grid>
+            // console.log(product);    
         })
     }
+    
     return (
-        <div>
-           <h2>All Products</h2>
-           <ul className="products-list">
-            {products ? showProducts() : ""}
-            </ul>
-        </div>
+        // <div>
+        //    <h2>All Products</h2>
+        //    <ul className="products-list">
+        //     {products ? showProducts() : ""}
+        //     </ul>
+        // </div>
+        <Grid container spacing={7}>
+            {products ? showProducts() : ""}    
+
+        </Grid>
     )
 }
 
