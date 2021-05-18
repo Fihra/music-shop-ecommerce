@@ -24,7 +24,7 @@ const Cart = () => {
         const fieldNames = ["Picture", "Name", "Price", ""];
 
         return fieldNames.map((field, i) => {
-            return <TableCell key={i}>{field}</TableCell>
+            return <TableCell key={i} style={{fontWeight: "bold"}}>{field}</TableCell>
         } )
     }
 
@@ -76,7 +76,7 @@ const Cart = () => {
             {/* <div>
             {myCart === "" && myCart.length <= 0  ? "Nothing in Cart": showItems()}
             </div> */}
-            <h4>Total Cost Due: ${getTotal()}</h4>
+            <h4>Total Cost Due: ${getTotal()}<Button>Pay Here</Button></h4>
             <TableContainer>
                 <Table>
                     <TableHead>

@@ -59,7 +59,7 @@ const ProductCard = (props) => {
     }
 
     return (
-        <Card>
+        <Card style={{backgroundColor: 'transparent'}}>
             {/* {product !== null ? showProduct() : ""} */}
             {showProduct()}
         </Card>

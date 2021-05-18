@@ -5,6 +5,7 @@ import About from './components/About';
 import Products from './components/Products';
 import Contact from './components/Contact';
 import Cart from './components/Cart';
+import Home from './components/Home';
 import { data } from './components/data';
 import React, { useEffect, useReducer } from 'react';
 import { Actions } from './components/Actions';
@@ -96,6 +97,7 @@ const App = () => {
             <Route path="/products" render={(props) => <Products {...props} />}/>
             <Route path="/contact" render={(props) => <Contact {...props}/>}/>
             <Route path="/cart" render={(props) => <Cart {...props}/>}/>
+            <Route path="/" render={(props) => <Home {...props}/>}/>
           </Switch>
         
         </main>
