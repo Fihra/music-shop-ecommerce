@@ -25,7 +25,7 @@ const ProductCard = (props) => {
             } 
             return false;
         }
-        console.log(product.logo)
+        // console.log(product.logo)
         return(
             // <div className="product-card">
             //     <div style={{height: 100, width: 450, border: "1px solid black", margin: "auto", marginTop: 20}}>
