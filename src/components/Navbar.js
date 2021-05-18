@@ -6,7 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import {Paper, Tabs, Tab} from '@material-ui/core';
 
 const Navbar = () => {
-    const [value, setValue] = useState();
+    const [value, setValue] = useState(true);
 
     const { productsData } = useContext(ProductContext);
 
@@ -16,8 +16,14 @@ const Navbar = () => {
         )
     }
 
+    const changeNav = (value) => {
+        setValue(true);
+    }
+
+    console.log(value);
+
     return(
-        <Paper>
+        <Paper style={{width: "100%", marginTop: "-25px", backgroundColor: "orange"}}>
             <h1>Music Shop</h1>
             <SiAudiomack/>
             {/* <ul className="nav-bar">
@@ -27,13 +33,13 @@ const Navbar = () => {
             </ul> */}
             <Tabs
                 value={value}
-                onChange={() => setValue(value)}
+                onChange={changeNav}
                 centered
             >
-                <Tab label="About" to="/about" component={Link} value={0}/>
-                <Tab label="Products" to="/products" component={Link} value={1}/>
-                <Tab label="Contact" to="/contact" component={Link}  value={2}/>
-                <Tab label="Cart" to="/cart" component={Link}  value={3}/>
+                <Tab label="About" to="/about" component={Link} value={true}/>
+                <Tab label="Products" to="/products" component={Link} value={false}/>
+                <Tab label="Contact" to="/contact" component={Link}  value={false}/>
+                <Tab label="Cart" to="/cart" component={Link}  value={false}/>
             </Tabs>
             {/* <div>
             <span style={{border: "1px solid black"}}><Link to="/cart">Cart</Link></span>

@@ -1,11 +1,12 @@
-import React, { useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { ProductContext } from './ProductContext';
-import { DataGrid } from '@material-ui/data-grid';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from '@material-ui/core';
+import { Actions } from './Actions';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Button} from '@material-ui/core';
 
 const Cart = () => {
-    const productContext = useContext(ProductContext);
-    const myCart = productContext.productsData.myCart;
+    const {productDispatch, productsData} = useContext(ProductContext);
+    const [ total, setTotal ] = useState(0);
+    const myCart = productsData.myCart;
 
     const showItems = () => {
         return (
@@ -19,68 +20,63 @@ const Cart = () => {
         )
     }
 
-    // const columns =  [
-    //     {field: 'id', headerName: "ID", width: 100},
-    //     {field: 'picture', headerName: "Picture", width: 150, height: 150 },
-    //     {field: 'name', headerName: "Name", width: 250},
-    //     {field: 'price', headerName: "Price", width: 130},
-    // ]
-
-    // const rows = () => {
-    //     const copyCart = [...myCart];
-    //     const newCart = copyCart.map((product, i) => {
-    //         const item = {id: i, picture: product.logo, name: product.name, price: `$${product.price}`};
-    //         return item;
-    //     })
-    //     return newCart;
-    // }
-
-    // const showData = () => {
-    //     return (
-    //         <div style={{height: 500, width: '75%'}}>
-    //             <DataGrid rows={rows()} columns={columns}/>
-    //         </div>
-    //     )
-    // }
-
     const rows =() => {
-        const fieldNames = ["Picture", "Name", "Price"];
+        const fieldNames = ["Picture", "Name", "Price", ""];
 
         return fieldNames.map((field, i) => {
             return <TableCell key={i}>{field}</TableCell>
         } )
     }
 
-    const showProducts = () => {
-        return myCart.map((item, i) => {
-            return (
-                <TableRow key={i}>
-                    <TableCell><img src={item.logo} alt={item.name} style={{height: 100, width: 100}}/></TableCell>
-                    <TableCell>{item.name}</TableCell>
-                    <TableCell>${item.price}</TableCell>
-                </TableRow>
-            )
-        } )
+    const checkCart = () => {
+        return myCart && myCart !== "";
     }
+
+    const handleClick = (selectedProduct) => {
+        productDispatch({type: Actions.DELETE_FROM_CART, payload: selectedProduct.id});
+    }
+
+    const showProducts = () => {
+        if(checkCart()){
+            return myCart.map((item, i) => {
+                return (
+                    <TableRow key={i}>
+                        <TableCell><img src={item.logo} alt={item.name} style={{height: 100, width: 100}}/></TableCell>
+                        <TableCell>{item.name}</TableCell>
+                        <TableCell>${item.price}</TableCell>
+                        <TableCell><Button onClick={()=> handleClick(item)}>Delete</Button></TableCell>
+                    </TableRow>
+                )
+            } )
+        }
+    }
+
+    // useEffect(() => {
+    //     productDispatch({type: Actions.GET_PRODUCTS, payload: localStorage.getItem("myCart")})
+    //     if(localStorage.getItem("myCart") !== null){
+    //       productDispatch({type: Actions.EXISTING_CART})
+    //     }
+    //     if(localStorage.getItem("myCart") === "[]") localStorage.clear();
+    //   }, [])
 
     const getTotal = () => {
-        let total = 0;
-        myCart.forEach((item) => {
-            return total += item.price;
-        })
-        return total;
-        // console.log(myCart);
-        // debugger;
+        let tempTotal = 0;
+        if(checkCart()){
+            myCart.forEach((item) => {
+                return tempTotal += item.price;
+            })
+            return tempTotal;
+        }
+        return 0;
+        // setTotal(tempTotal);
     }
-
     return (
         <div>
             <h2>My Shopping Cart</h2>
             {/* <div>
             {myCart === "" && myCart.length <= 0  ? "Nothing in Cart": showItems()}
-            {myCart === "" && myCart.length <= 0  ? "Nothing in Cart": showData()}
             </div> */}
-            <span>Total: ${getTotal()}</span>
+            <h4>Total Cost Due: ${getTotal()}</h4>
             <TableContainer>
                 <Table>
                     <TableHead>
@@ -89,7 +85,7 @@ const Cart = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {showProducts()}
+                        { showProducts()}
                     </TableBody>
                 </Table>
             </TableContainer>

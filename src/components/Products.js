@@ -18,7 +18,7 @@ const Products = () => {
             return <Grid item xs={4} key={i}><ProductCard key={i} product={product}/></Grid> 
         })
     }
-    
+    console.log(products);
     return (
         // <div>
         //    <h2>All Products</h2>
