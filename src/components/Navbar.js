@@ -39,10 +39,10 @@ const Navbar = () => {
                 indicatorColor="primary"
                 textColor="primary"
             >
-                <Tab label="About" to="/about" component={Link} value='/about' />
+                <Tab label="About" to="/about" component={Link} value='/about'/>
                 <Tab label="Products" to="/products" component={Link} value='/products'/>
-                <Tab label="Contact" to="/contact" component={Link} value='/cart' />
-                <Tab label="Cart" to="/cart" component={Link} value='/' />
+                <Tab label="Contact" to="/contact" component={Link} value='/contact'/>
+                <Tab label="Cart" to="/cart" component={Link} value='/cart'/>
             </Tabs>
             {/* <div>
             <span style={{border: "1px solid black"}}><Link to="/cart">Cart</Link></span>
