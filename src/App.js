@@ -13,7 +13,8 @@ import { ProductContext } from './components/ProductContext';
 
 const initialState = {
   products: "",
-  myCart: ""
+  myCart: "",
+  currentPath: ""
 }
 
 const reducer = (state = initialState, action) => {
@@ -41,6 +42,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         myCart: cartExists
       }
+    case Actions.GET_CURRENT_PATH:
+      return {
+        ...state,
+        currentPath: action.payload
+      }
     default:
       return state;
   }
@@ -65,7 +71,6 @@ const DeleteFromCart = (currentCart, itemID) => {
     localStorage.setItem('myCart', JSON.stringify(newCart));
     return newCart;
   }
-
 }
 
 //If Cart has items already
@@ -86,6 +91,10 @@ const App = () => {
     if(localStorage.getItem("myCart") === "[]") localStorage.clear();
   }, [])
 
+  useEffect(() => {
+    dispatch({type: Actions.GET_CURRENT_PATH, payload: window.location.pathname});
+  }, [productsData.currentPath])
+
   return (
     <ProductContext.Provider value={{productsData: productsData, productDispatch: dispatch}}>
       <Router>
@@ -99,7 +108,6 @@ const App = () => {
             <Route path="/cart" render={(props) => <Cart {...props}/>}/>
             <Route path="/" render={(props) => <Home {...props}/>}/>
           </Switch>
-        
         </main>
       </div>
       </Router>

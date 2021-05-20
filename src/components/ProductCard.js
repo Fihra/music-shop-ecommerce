@@ -1,11 +1,11 @@
-import React, { useState, useContext } from 'react'
+import React, { useContext } from 'react'
 import { Actions } from './Actions';
 import { ProductContext } from './ProductContext';
 import { Card, CardHeader, CardMedia, CardContent, CardActions, Avatar, IconButton, Typography, Button } from '@material-ui/core';
 
 const ProductCard = (props) => {
-    const [product, setProduct] = useState(props.product);
     const { productDispatch, productsData } = useContext(ProductContext);
+    const { logo, name, description, price, type } = props.product;  
 
     const showProduct = () => {
         const handleClick = (selectedProduct) => {
@@ -37,22 +37,22 @@ const ProductCard = (props) => {
             // </div>
             <>
                 <CardHeader
-                    title={product.name}
-                    subheader={`$${product.price}`}
+                    title={name}
+                    subheader={`$${price}`}
                     subheaderTypographyProps={{color: "primary"}}
                 />
                 <CardMedia
                     style={{height: 100, width: 100, margin: 'auto'}}
-                    image={product.logo}
-                    title={product.name}
+                    image={logo}
+                    title={name}
                 />
                 <CardContent>
                     <Typography variant="body2" color="textSecondary" component="p">
-                        {product.description}
+                        {description}
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    <Button style={{margin: 'auto'}} onClick={() =>handleClick(product)}>{checkIfInCart(product) ? "Remove from Cart" : "Add to Cart"}</Button>
+                    <Button style={{margin: 'auto'}} onClick={() =>handleClick(props.product)}>{checkIfInCart(props.product) ? "Remove from Cart" : "Add to Cart"}</Button>
                 </CardActions>
             </>
         )

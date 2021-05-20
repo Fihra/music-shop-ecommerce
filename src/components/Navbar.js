@@ -4,11 +4,10 @@ import {GiGuitarBassHead} from 'react-icons/gi';
 import { ProductContext } from './ProductContext'; 
 import { makeStyles } from '@material-ui/core/styles';
 import {Paper, Tabs, Tab} from '@material-ui/core';
+import { Actions } from './Actions';
 
 const Navbar = () => {
-    const [value, setValue] = useState(true);
-
-    const { productsData } = useContext(ProductContext);
+    const { productsData, productDispatch } = useContext(ProductContext);
 
     const showRedDot = () => {
         return(
@@ -17,11 +16,10 @@ const Navbar = () => {
     }
 
     const changeNav = (value) => {
-        setValue(true);
+        productDispatch({type: Actions.GET_CURRENT_PATH, payload: value})
     }
 
-    console.log(value);
-
+    console.log(productsData.currentPath);
     return(
         <Paper style={{width: "100%", marginTop: "-25px", background: "linear-gradient(40deg, rgba(217,155,48,1) 0%, rgba(255,204,64,1) 79%, rgba(221,221,221,1) 100%)"}}>
             <Link to="/">
@@ -34,14 +32,17 @@ const Navbar = () => {
                 <li><Link to="/contact">Contact</Link></li>
             </ul> */}
             <Tabs
-                value={value}
+                value={productsData.currentPath}
                 onChange={changeNav}
                 centered
+                aria-label="scrollable force tabs"
+                indicatorColor="primary"
+                textColor="primary"
             >
-                <Tab label="About" to="/about" component={Link} value={true}/>
-                <Tab label="Products" to="/products" component={Link} value={false}/>
-                <Tab label="Contact" to="/contact" component={Link}  value={false}/>
-                <Tab label="Cart" to="/cart" component={Link}  value={false}/>
+                <Tab label="About" to="/about" component={Link} value='/about' />
+                <Tab label="Products" to="/products" component={Link} value='/products'/>
+                <Tab label="Contact" to="/contact" component={Link} value='/cart' />
+                <Tab label="Cart" to="/cart" component={Link} value='/' />
             </Tabs>
             {/* <div>
             <span style={{border: "1px solid black"}}><Link to="/cart">Cart</Link></span>

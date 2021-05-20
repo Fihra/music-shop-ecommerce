@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import ProductCard from './ProductCard';
 import { ProductContext } from './ProductContext';
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid  } from '@material-ui/core';
+import { Grid, Slide } from '@material-ui/core';
 
 const Products = () => {
     const [products, setProducts] = useState(null);
@@ -18,7 +18,6 @@ const Products = () => {
             return <Grid item xs={4} key={i}><ProductCard key={i} product={product}/></Grid> 
         })
     }
-    console.log(products);
     return (
         // <div>
         //    <h2>All Products</h2>
@@ -26,9 +25,11 @@ const Products = () => {
         //     {products ? showProducts() : ""}
         //     </ul>
         // </div>
-        <Grid container spacing={7} style={{paddingTop: 50}}>
-            {products ? showProducts() : ""}    
-        </Grid>
+        <Slide direction="up" in={true} timeout={1500} mountOnEnter unmountOnExit>
+            <Grid container spacing={7} style={{paddingTop: 50}}>
+                {products ? showProducts() : ""}    
+            </Grid>
+        </Slide>
     )
 }
 

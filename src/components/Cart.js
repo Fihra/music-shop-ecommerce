@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { ProductContext } from './ProductContext';
 import { Actions } from './Actions';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Button} from '@material-ui/core';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Button, Slide} from '@material-ui/core';
 
 const Cart = () => {
     const {productDispatch, productsData} = useContext(ProductContext);
-    const [ total, setTotal ] = useState(0);
     const myCart = productsData.myCart;
 
     const showItems = () => {
@@ -72,11 +71,14 @@ const Cart = () => {
     }
     return (
         <div>
+            <Slide direction="right" in={true} timeout={1500} mountOnEnter unmountOnExit>
             <h2>My Shopping Cart</h2>
+            </Slide>
             {/* <div>
             {myCart === "" && myCart.length <= 0  ? "Nothing in Cart": showItems()}
             </div> */}
             <h4>Total Cost Due: ${getTotal()}<Button>Pay Here</Button></h4>
+            
             <TableContainer>
                 <Table>
                     <TableHead>
@@ -89,6 +91,7 @@ const Cart = () => {
                     </TableBody>
                 </Table>
             </TableContainer>
+            
         </div>
     )
 }
