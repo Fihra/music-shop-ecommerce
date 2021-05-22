@@ -67,7 +67,6 @@ const Cart = () => {
             return tempTotal;
         }
         return 0;
-        // setTotal(tempTotal);
     }
     return (
         <div>
