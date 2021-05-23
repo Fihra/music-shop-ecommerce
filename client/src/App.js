@@ -10,6 +10,8 @@ import { data } from './components/data';
 import React, { useEffect, useReducer } from 'react';
 import { Actions } from './components/Actions';
 import { ProductContext } from './components/ProductContext';
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
 
 const initialState = {
   products: "",
@@ -79,6 +81,8 @@ const ExistingInCart = () => {
   storageCart = JSON.parse(storageCart);
   return storageCart;
 }
+// console.log(process.env.REACT_APP_PUBLISHABLE_KEY);
+const stripeTestPromise = loadStripe(process.env.REACT_APP_PUBLISHABLE_KEY);
 
 const App = () => {
   const [productsData, dispatch] = useReducer(reducer, initialState);
@@ -105,7 +109,7 @@ const App = () => {
             <Route path="/about" render={(props) => <About {...props}/>}/>
             <Route path="/products" render={(props) => <Products {...props} />}/>
             <Route path="/contact" render={(props) => <Contact {...props}/>}/>
-            <Route path="/cart" render={(props) => <Cart {...props}/>}/>
+            <Route path="/cart" render={(props) => <Elements stripe={stripeTestPromise}><Cart {...props}/></Elements>}/>
             <Route path="/" render={(props) => <Home {...props}/>}/>
           </Switch>
         </main>

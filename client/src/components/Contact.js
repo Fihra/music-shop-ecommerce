@@ -46,7 +46,7 @@ const Contact = () => {
                     <TextField multiline rows={4} style={{width: 600}} id="standard-multiline-static" label="Message" name="message" type="text" placeholder="Have any questions?" {...register("message")}/>           
                     </p>
                     <p>     
-                    <Button type="submit">Submitting</Button>
+                    <Button type="submit">Submit</Button>
                     </p>
                 </fieldset>
                 </form>
