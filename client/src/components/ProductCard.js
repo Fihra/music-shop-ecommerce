@@ -26,15 +26,6 @@ const ProductCard = (props) => {
             return false;
         }
         return(
-            // <div className="product-card">
-            //     <div style={{height: 100, width: 450, border: "1px solid black", margin: "auto", marginTop: 20}}>
-            //     <img style={{height: 100, width: 100}}src={product.logo} alt={product.description}/>
-            //     </div>
-            //     <h3>{product.name}</h3>
-            //     Price: <span>${product.price}</span>
-            //     <p>{product.description}</p>
-            //     <button onClick={() => handleClick(product)}>{checkIfInCart(product) ? "Remove from Cart" : "Add to Cart"}</button>
-            // </div>
             <>
                 <CardHeader
                     title={name}
@@ -60,7 +51,6 @@ const ProductCard = (props) => {
 
     return (
         <Card style={{backgroundColor: 'transparent'}}>
-            {/* {product !== null ? showProduct() : ""} */}
             {showProduct()}
         </Card>
     )

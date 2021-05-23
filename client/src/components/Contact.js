@@ -24,15 +24,6 @@ const Contact = () => {
                 <form onSubmit={handleSubmit(onSubmit)}>
                 <fieldset>
                     <legend>Contact Form</legend>
-                    {/* <label>Name</label> */}
-                    {/* <input defaultValue="Testing" type="text" name="username" {...register("username")}/> */}         
-                    {/* <label>Subject</label>
-                    <input defaultValue="Subject" type="text" name="subject" {...register("subject")}/> */}
-                    {/* <label>Email</label>
-                    <input defaultValue="example@email.com" type="email" name="email" {...register("email")}/> */}
-                    {/* <label>Message</label>
-                    <textarea defaultValue="Have any questions?" name="message" {...register("message")}/> */}
-                    {/* <input type="submit" value="Submitting"></input> */}
                     <p>
                     <TextField id="standard-basic" label="Name" name="username" type="text" {...register("username")}/>
                     </p>

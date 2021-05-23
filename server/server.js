@@ -15,8 +15,6 @@ app.get("/", (req, res) => {
 
 app.post("/payment", (req, res) => {
     const { myCart, token } = req.body.body;
-    // console.log("Product: ", product);
-    // console.log("Price: ", product.price);
     const idempontencyKey = uuid4();
     console.log(myCart);
 

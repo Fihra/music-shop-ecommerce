@@ -81,7 +81,6 @@ const ExistingInCart = () => {
   storageCart = JSON.parse(storageCart);
   return storageCart;
 }
-// console.log(process.env.REACT_APP_PUBLISHABLE_KEY);
 const stripeTestPromise = loadStripe(process.env.REACT_APP_PUBLISHABLE_KEY);
 
 const App = () => {
