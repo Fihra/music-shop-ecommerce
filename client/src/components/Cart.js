@@ -8,6 +8,7 @@ import { useForm } from 'react-hook-form';
 
 const Cart = () => {
     const [ success, setSuccess ] = useState(false);
+    const [ currentTotal, setCurrentTotal ] = useState(0);
     const { register, handleSubmit, watch, errors, reset } = useForm();
     const stripe = useStripe();
     const elements = useElements();
@@ -58,51 +59,30 @@ const Cart = () => {
         }
     }
 
-    const handlePay = async () => {
-        // e.preventDefault();
-        // const { error, paymentMethod } = await stripe.createPaymentMethod({
-        //     type: "card",
-        //     card: elements.getElement(CardElement)
-        // })
+    const handlePay = async (formData) => {
+        console.log(formData);
 
-        // if(!error){
-        //     try{
-        //         const { id} = paymentMethod;
-        //         const response = await axios.post("http://localhost:3001/payment", {
-        //             amount: 1000,
-        //             id
-        //         })
-        //         if(response.data.success){
-        //             console.log("Successful payment");
-        //             setSuccess(true);
-        //         }
-        //     } catch(error){
-        //         console.log("Error", error);
-        //     }
-        // } else {
-        //     console.log(error.message);
-        // }
+        // const { myData: clientSecret } = await axios.post('/api/payment_intents', {
+            
+        // })
 
     }
 
-    // useEffect(() => {
-    //     productDispatch({type: Actions.GET_PRODUCTS, payload: localStorage.getItem("myCart")})
-    //     if(localStorage.getItem("myCart") !== null){
-    //       productDispatch({type: Actions.EXISTING_CART})
-    //     }
-    //     if(localStorage.getItem("myCart") === "[]") localStorage.clear();
-    //   }, [])
-
-    const getTotal = () => {
+    useEffect(() => {
         let tempTotal = 0;
         if(checkCart()){
             myCart.forEach((item) => {
                 return tempTotal += item.price;
             })
-            return tempTotal;
+            return setCurrentTotal(tempTotal);
         }
-        return 0;
+        return setCurrentTotal(0);
+    }, [myCart])
+
+    const cardElementOptions = {
+        hidePostalCode: true
     }
+
     return (
         
         <div>
@@ -125,8 +105,8 @@ const Cart = () => {
                 </Table>
             </TableContainer>
             <div>
-            <h4>Total Cost Due: ${getTotal()}</h4>
-                <form style={{margin: "auto",width: 700, height: 500}} onSubmit={() => handlePay()}>
+            <h4>Total Cost Due: ${currentTotal}</h4>
+                <form style={{margin: "auto",width: 700, height: 500}} onSubmit={handleSubmit(handlePay)}>
                     <fieldset>
                         <legend>Fill out this form</legend>
                         
@@ -145,15 +125,13 @@ const Cart = () => {
                         <TextField style={{padding: 3}}  id="standard-basic" label="Zip Code" name="zipcode" type="number" {...register("zipcode")}/>
 
                         <TextField style={{padding: 3}} id="standard-basic" label="Email" name="email" type="email" {...register("email")}/>
-             
-                        <CardElement />
+                        <div style={{marginTop: 15, margin: "auto", width: 300, height: 50}}>
+                        <CardElement options={cardElementOptions} />
+                        </div>
                         <Button type="submit">Pay Now</Button>
-                    </fieldset>
-                    
-                </form>
-                
-            </div>
-            
+                    </fieldset>      
+                </form>       
+            </div> 
             {!success ? "" : "Your purchase was succcessful!"}
         </div>
     )
