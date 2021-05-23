@@ -5,6 +5,7 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Butto
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
+import StripeCheckout from 'react-stripe-checkout';
 
 const Cart = () => {
     const [ success, setSuccess ] = useState(false);
@@ -62,9 +63,11 @@ const Cart = () => {
     const handlePay = async (formData) => {
         console.log(formData);
 
-        // const { myData: clientSecret } = await axios.post('/api/payment_intents', {
-            
-        // })
+        const { myData: clientSecret } = await axios.post('./payment_intents', {
+            amount: currentTotal
+        })
+
+        console.log(clientSecret);
 
     }
 
@@ -106,7 +109,7 @@ const Cart = () => {
             </TableContainer>
             <div>
             <h4>Total Cost Due: ${currentTotal}</h4>
-                <form style={{margin: "auto",width: 700, height: 500}} onSubmit={handleSubmit(handlePay)}>
+                {/* <form style={{margin: "auto",width: 700, height: 500}} onSubmit={handleSubmit(handlePay)}>
                     <fieldset>
                         <legend>Fill out this form</legend>
                         
@@ -130,7 +133,14 @@ const Cart = () => {
                         </div>
                         <Button type="submit">Pay Now</Button>
                     </fieldset>      
-                </form>       
+                </form>        */}
+                <StripeCheckout stripeKey={process.env.REACT_APP_PUBLISHABLE_KEY}
+                    name="Purchase"
+                    amount={currentTotal * 100}
+                >
+                    <Button>Pay Now</Button>
+                </StripeCheckout>
+
             </div> 
             {!success ? "" : "Your purchase was succcessful!"}
         </div>
