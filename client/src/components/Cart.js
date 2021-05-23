@@ -60,15 +60,20 @@ const Cart = () => {
         }
     }
 
-    const handlePay = async (formData) => {
-        console.log(formData);
-
-        const { myData: clientSecret } = await axios.post('./payment_intents', {
-            amount: currentTotal
+    const makePayment = (token) => {
+        const body = {
+            token,
+            myCart
+            
+        }
+        const headers = {
+            "Content-Type": "application/json"
+        }
+        axios.post("http://localhost:3001/payment", { body })
+        .then(res => {
+            console.log(res);
+            console.log(res.data);
         })
-
-        console.log(clientSecret);
-
     }
 
     useEffect(() => {
@@ -135,6 +140,7 @@ const Cart = () => {
                     </fieldset>      
                 </form>        */}
                 <StripeCheckout stripeKey={process.env.REACT_APP_PUBLISHABLE_KEY}
+                    token={makePayment}
                     name="Purchase"
                     amount={currentTotal * 100}
                 >
