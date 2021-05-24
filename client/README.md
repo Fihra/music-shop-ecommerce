@@ -8,7 +8,7 @@ A mock E-Commerce shop of used music gear.
 - Material UI
 - React Hook Form
 - Email.js
-- Planning to use Stripe.js or FastSpring
+- Stripe.js
 
 ![demo video](src/assets/music-leftovers-demo.gif)
 
